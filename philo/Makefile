@@ -6,7 +6,7 @@
 #    By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 14:52:42 by lpascrea          #+#    #+#              #
-#    Updated: 2021/10/27 16:46:38 by lpascrea         ###   ########.fr        #
+#    Updated: 2021/11/03 13:48:38 by lpascrea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,12 @@ _YELLOW	= \033[0;33m
 _MAG 	= \033[0;35m
 #------#
 
-SRCS		=	philo.c
+SRCS		=	philo.c \
+				./errors/error.c \
+				./srcs/args.c \
+				./srcs/utils.c \
+				./srcs/init.c \
+				./thread/philo_thread.c \
 
 INC			=	philo.h
 
@@ -27,7 +32,7 @@ OBJS		=	${SRCS:.c=.o}
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror 
 
 RM			=	rm -f
 
@@ -37,7 +42,7 @@ all:		${NAME}
 			@echo "$(_GREEN)Philo is ready $(_END)"
 
 $(NAME):	${OBJS} ${INC}
-			${CC} ${OBJS} -I. -o ${NAME}
+			${CC} ${OBJS} -pthread -I. -o ${NAME}
 
 %.o:		%.c
 			${CC} ${CFLAGS} -o $@ -c $< -I ${INC}
