@@ -6,11 +6,37 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:28:50 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/03 13:29:47 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/04 14:47:31 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	ft_putnbr(int n)
+{
+	char	c;
+	
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+	{
+		c = n + 48;
+		write(1, &c, 1);
+	}
+}
 
 int	ft_atoi(char *str)
 {
@@ -48,7 +74,16 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	get_time(void)
+void	my_usleep(int time, t_data *data)
+{
+	int		begin;
+
+	begin = get_time() - data->start;
+	while ((get_time() - data->start) - begin < time)
+		usleep(10);
+}
+
+long	get_time(void)
 {
 	struct timeval	tv;
 

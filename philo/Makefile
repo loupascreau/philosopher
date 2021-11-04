@@ -6,7 +6,7 @@
 #    By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 14:52:42 by lpascrea          #+#    #+#              #
-#    Updated: 2021/11/03 13:48:38 by lpascrea         ###   ########.fr        #
+#    Updated: 2021/11/04 15:04:37 by lpascrea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRCS		=	philo.c \
 				./srcs/args.c \
 				./srcs/utils.c \
 				./srcs/init.c \
+				./srcs/free.c \
 				./thread/philo_thread.c \
+				./thread/actions.c \
 
 INC			=	philo.h
 
@@ -32,7 +34,7 @@ OBJS		=	${SRCS:.c=.o}
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror 
+CFLAGS		=	-Wall -Wextra -Werror -g
 
 RM			=	rm -f
 

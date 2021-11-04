@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/03 16:34:32 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/04 15:18:50 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,31 @@
 void	*routine(void *arg)
 {
 	t_philo	*philo;
+	t_data	*data;
 
 	philo = (t_philo *)arg;
-	printf("%d init\n", philo->which);
+	data = philo->data;
+	eat(philo, data);
 	return (NULL);
 }
 
 int	philo_thread(t_data *data)
 {
-	pthread_t			th[data->nbr_philo];
-	pthread_mutex_t		mutex;
 	int			i;
 	
 	i = 0;
 	data->start = get_time();
-	pthread_mutex_init(&mutex, NULL);
-	while (i < data->nbr_philo)
+	while (i < data->nbr_human)
 	{
-		data->philo[i].which = i + 1;
-		pthread_create(&th[i], NULL, &routine, (void *)&data->philo[i]);
+		if (pthread_create(&data->philo[i].th, NULL, &routine, (void *)&data->philo[i]))
+			return (ft_phtread_create_error(data));
 		i++;
 	}
 	i = 0;
-	while (i < data->nbr_philo)
+	while (i < data->nbr_human)
 	{
-		pthread_join(th[i], NULL);
+		pthread_join(data->philo[i].th, NULL);
 		i++;
 	}
-	pthread_mutex_destroy(&mutex);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 10:49:05 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/03 14:42:39 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/04 15:21:40 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ int	ft_malloc_error(void)
 {
 	write(2, "malloc error\n", 13);
 	return (0);
+}
+
+int	ft_phtread_create_error(t_data *data)
+{
+	write(2, "pthread_create error\n", 21);
+	return (ft_exit(data));
 }

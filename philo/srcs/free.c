@@ -1,47 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 11:04:05 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/04 14:58:08 by lpascrea         ###   ########.fr       */
+/*   Created: 2021/11/04 14:55:11 by lpascrea          #+#    #+#             */
+/*   Updated: 2021/11/04 15:14:45 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	is_digit(char *arg)
+int	ft_exit(t_data *data)
 {
 	int		i;
-	int		nb;
 
 	i = 0;
-	nb = ft_atoi(arg);
-	if (nb <= 0)
-		return (0);
-	while (arg[i])
+	while (i < data->nbr_human)
 	{
-		if (arg[i] < '0' || arg[i] > '9')
-			return (0);
+		pthread_mutex_destroy(&data->m_fork[i]);
 		i++;
 	}
-	return (1);
-}
-
-int	ft_check_args(char **argv, int argc)
-{
-	int		i;
-
-	i = 1;
-	if (argc < 5 || argc > 6)
-		return (ft_argc_error(argc));
-	while (argv[i])
-	{
-		if (!is_digit(argv[i]))
-			return (ft_invalid_arg(argv[i]));
-		i++;
-	}
-	return (1);
+	pthread_mutex_destroy(&data->m_write);
+	free(data->philo);
+	data->philo = NULL;
+	free(data->m_fork);
+	data->m_fork = NULL;
+	return (0);
 }
