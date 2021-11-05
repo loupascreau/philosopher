@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:16:40 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/04 15:11:20 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/05 14:01:40 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	init_philo(t_data *data)
 	{
 		data->philo[i].data = data;
 		data->philo[i].human = i;
+		data->philo[i].last_eat = -1;
+		data->philo[i].meal_nbr = 0;
 		data->philo[i].left_f = data->philo[i].human;
 		data->philo[i].right_f = (data->philo[i].left_f + 1) % data->nbr_human;
 		pthread_mutex_init(&data->m_fork[i], NULL);
@@ -32,6 +34,8 @@ int	init_philo(t_data *data)
 
 int	ft_init(t_data *data, char **argv, int argc)
 {
+	data->sig = INIT;
+	data->needing_eat = 0;
 	data->nbr_human = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
