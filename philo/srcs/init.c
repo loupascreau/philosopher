@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:16:40 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 13:09:48 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:01:37 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init_philo(t_data *data)
 		pthread_mutex_init(&data->m_fork[i], NULL);
 		i++;
 	}
+	pthread_mutex_init(&data->tab_fork, NULL);
 	pthread_mutex_init(&data->m_write, NULL);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:50:54 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 13:09:39 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:01:22 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_data
 	pthread_mutex_t		m_monitor;
 	pthread_mutex_t		m_write;
 	pthread_mutex_t		*m_fork;
+	pthread_mutex_t		tab_fork;
 	int					*t_fork;
 }				t_data;
 

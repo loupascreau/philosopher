@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 13:11:17 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:04:41 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ void	*routine(void *arg)
 	data = philo->data;
 	while (1)
 	{
+		eat(philo, data);
 		if (data->nbr_of_eat > 0 && philo->meal_nbr == data->nbr_of_eat)
 		{
 			data->end_eat++;
 			return(NULL);
 		}
-		eat(philo, data);
 		if (ft_check_dead(data))
+		{
+			ft_unlock_fork(data, philo);
 			return (NULL);
+		}
 		sleeping(philo, data);
 	}
 	return (NULL);

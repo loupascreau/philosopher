@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:55:11 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 08:05:46 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:01:52 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_exit(t_data *data)
 		pthread_mutex_destroy(&data->m_fork[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&data->tab_fork);
 	pthread_mutex_destroy(&data->m_write);
 	free(data->philo);
 	data->philo = NULL;
