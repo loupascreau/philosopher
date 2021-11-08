@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 09:53:09 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:11:17 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	*monitoring(void *arg)
 {
 	t_data	*data;
+	int		i;
 
+	i = 0;
 	data = (t_data *)arg;
 	while (1)
 	{
+		if (data->end_eat == data->nbr_human)
+			break ;
 		if (ft_check_dead(data))
 			break ;
 	}
@@ -34,6 +38,11 @@ void	*routine(void *arg)
 	data = philo->data;
 	while (1)
 	{
+		if (data->nbr_of_eat > 0 && philo->meal_nbr == data->nbr_of_eat)
+		{
+			data->end_eat++;
+			return(NULL);
+		}
 		eat(philo, data);
 		if (ft_check_dead(data))
 			return (NULL);

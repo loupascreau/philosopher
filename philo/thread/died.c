@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 14:15:42 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 08:37:00 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:03:16 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,18 @@ int	ft_check_dead(t_data *data)
 	}
 	pthread_mutex_unlock(&data->m_monitor);
 	return (0);
+}
+
+void	ft_unlock_fork(t_data *data, t_philo *philo)
+{
+	if (data->t_fork[philo->left_f] == 1)
+	{
+		data->t_fork[philo->left_f] = 0;
+		pthread_mutex_unlock(&data->m_fork[philo->left_f]);
+	}
+	if (data->t_fork[philo->right_f] == 1)
+	{
+		data->t_fork[philo->right_f] = 0;
+		pthread_mutex_unlock(&data->m_fork[philo->right_f]);
+	}
 }

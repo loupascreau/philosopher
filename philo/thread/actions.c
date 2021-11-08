@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 15:03:12 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 09:55:17 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:00:02 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,7 @@ void	take_a_fork(t_philo *philo, t_data *data, int fork)
 		while (data->time_to_die < data->time_to_eat)
 		{
 			if (get_time() - data->start >= data->time_to_die)
-			{
-				if (ft_check_dead(data))
-					return ;
-				while (i < data->nbr_human)
-				{
-					if (data->t_fork[i] == 1)
-					{
-						data->t_fork[i] = 0;
-						pthread_mutex_unlock(&data->m_fork[i]);
-					}
-					i++;
-				}
 				return (died(philo, data));
-			}
 		}
 	}
 	pthread_mutex_lock(&data->m_fork[fork]);
@@ -77,18 +64,18 @@ void	eat(t_philo *philo, t_data *data)
 		take_a_fork(philo, data, philo->left_f);
 	}
 	if (ft_check_dead(data))
+	{
+		ft_unlock_fork(data, philo);
 		return ;
+	}
 	echoing(philo, data, EAT);
+	philo->meal_nbr++;
 	philo->last_eat = get_time();
 	my_usleep(data->time_to_eat, data);
 	if (ft_check_dead(data))
-		return ;
-	if (get_time() - philo->last_eat > data->time_to_die)
 	{
-		pthread_mutex_lock(&data->m_monitor);
-		data->sig = DEAD;
-		pthread_mutex_unlock(&data->m_monitor);
-		echoing(philo, data, DIED);
+		ft_unlock_fork(data, philo);
+		return ;
 	}
 	data->t_fork[philo->left_f] = 0;
 	pthread_mutex_unlock(&data->m_fork[philo->left_f]);
@@ -98,8 +85,24 @@ void	eat(t_philo *philo, t_data *data)
 
 void	sleeping(t_philo *philo, t_data *data)
 {
+	int		i;
+
+	i = 0;
 	echoing(philo, data, SLEEP);
 	my_usleep(data->time_to_sleep, data);
+	if (philo->last_eat >= 0 && get_time() - philo->last_eat > data->time_to_die)
+	{
+		while (i < data->nbr_human)
+		{
+			if (data->t_fork[i] == 1)
+			{
+				data->t_fork[i] = 0;
+				pthread_mutex_unlock(&data->m_fork[i]);
+			}
+			i++;
+		}
+		return (died(philo, data));
+	}
 	echoing(philo, data, THINK);
 }
 

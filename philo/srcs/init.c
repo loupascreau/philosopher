@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:16:40 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 09:49:08 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:09:48 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_philo(t_data *data)
 int	ft_init(t_data *data, char **argv, int argc)
 {
 	data->sig = INIT;
-	data->needing_eat = 0;
+	data->end_eat = 0;
 	data->nbr_human = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
