@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/05 14:28:29 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 09:53:09 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,8 @@ void	*monitoring(void *arg)
 	data = (t_data *)arg;
 	while (1)
 	{
-		pthread_mutex_lock(&data->m_monitor);
-		if (data->sig == DEAD)
-		{
-			pthread_mutex_unlock(&data->m_monitor);
+		if (ft_check_dead(data))
 			break ;
-		}
-		pthread_mutex_unlock(&data->m_monitor);
 	}
 	return (NULL);
 }
@@ -40,13 +35,8 @@ void	*routine(void *arg)
 	while (1)
 	{
 		eat(philo, data);
-		pthread_mutex_lock(&data->m_monitor);
-		if (data->sig == DEAD)
-		{
-			pthread_mutex_unlock(&data->m_monitor);
-			break ;
-		}
-		pthread_mutex_unlock(&data->m_monitor);
+		if (ft_check_dead(data))
+			return (NULL);
 		sleeping(philo, data);
 	}
 	return (NULL);

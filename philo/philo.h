@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:50:54 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/05 14:18:45 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 09:48:59 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_data
 	pthread_mutex_t		m_monitor;
 	pthread_mutex_t		m_write;
 	pthread_mutex_t		*m_fork;
+	int					*t_fork;
 }				t_data;
 
 /******************************************************************************/
@@ -96,6 +97,7 @@ long	get_time(void);
 
 int		philo_thread(t_data *data);
 void	ft_only_one_philo(t_philo *philo, t_data *data);
+int		ft_check_dead(t_data *data);
 
 /******************************************************************************/
 /*									actions									  */

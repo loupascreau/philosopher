@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:16:40 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/05 14:01:40 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 09:49:08 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	init_philo(t_data *data)
 	i = 0;
 	while (i < data->nbr_human)
 	{
+		data->t_fork[i] = 0;
 		data->philo[i].data = data;
 		data->philo[i].human = i;
 		data->philo[i].last_eat = -1;
@@ -49,6 +50,9 @@ int	ft_init(t_data *data, char **argv, int argc)
 		return (ft_malloc_error());
 	data->m_fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->nbr_human);
 	if (!data->m_fork)
+		return (ft_malloc_error());
+	data->t_fork = (int *)malloc(sizeof(int) * data->nbr_human);
+	if (!data->t_fork)
 		return (ft_malloc_error());
 	return (init_philo(data));
 }

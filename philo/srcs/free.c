@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:55:11 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/04 15:14:45 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/08 08:05:46 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	ft_exit(t_data *data)
 	data->philo = NULL;
 	free(data->m_fork);
 	data->m_fork = NULL;
+	free(data->t_fork);
+	data->t_fork = NULL;
 	return (0);
 }
