@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 16:04:41 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/09 13:57:54 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	*monitoring(void *arg)
 {
 	t_data	*data;
-	int		i;
 
-	i = 0;
 	data = (t_data *)arg;
 	while (1)
 	{

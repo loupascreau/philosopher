@@ -6,7 +6,7 @@
 #    By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 14:52:42 by lpascrea          #+#    #+#              #
-#    Updated: 2021/11/08 11:44:26 by lpascrea         ###   ########.fr        #
+#    Updated: 2021/11/09 13:58:18 by lpascrea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,11 @@ SRCS		=	philo.c \
 				./thread/actions.c \
 				./thread/died.c \
 
-INC			=	philo.h
-
 OBJS		=	${SRCS:.c=.o}
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=thread
 
 RM			=	rm -f
 
@@ -44,11 +42,11 @@ NAME		=	philo
 all:		${NAME}
 			@echo "$(_GREEN)Philo is ready $(_END)"
 
-$(NAME):	${OBJS} ${INC}
+$(NAME):	${OBJS}
 			${CC} ${OBJS} -pthread -I. -o ${NAME}
 
 %.o:		%.c
-			${CC} ${CFLAGS} -o $@ -c $< -I ${INC}
+			${CC} ${CFLAGS} -o $@ -c $< -I.
 
 clean:
 			${RM} ${OBJS}
