@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 15:03:12 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/09 13:58:07 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:24:14 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	echoing(t_philo *philo, t_data *data, char *action)
 	pthread_mutex_lock(&data->m_write);
 	if (ft_check_dead(data))
 	{
+		printf("human_b = %d\n", philo->human);
 		pthread_mutex_unlock(&data->m_write);
+		ft_unlock_fork(data, philo);
 		return ;
 	}
 	ft_putnbr(get_time() - data->start);
@@ -47,6 +49,7 @@ void	take_a_fork(t_philo *philo, t_data *data, int fork)
 	}
 	pthread_mutex_unlock(&data->tab_fork);
 	pthread_mutex_lock(&data->m_fork[fork]);
+	printf("human = %d\n", philo->human);
 	pthread_mutex_lock(&data->tab_fork);
 	data->t_fork[fork] = 1;
 	pthread_mutex_unlock(&data->tab_fork);
@@ -73,16 +76,7 @@ void	eat(t_philo *philo, t_data *data)
 	philo->meal_nbr++;
 	philo->last_eat = get_time();
 	my_usleep(data->time_to_eat, data);
-	if (ft_check_dead(data))
-		return ;
-	pthread_mutex_lock(&data->tab_fork);
-	data->t_fork[philo->left_f] = 0;
-	pthread_mutex_unlock(&data->tab_fork);
-	pthread_mutex_unlock(&data->m_fork[philo->left_f]);
-	pthread_mutex_lock(&data->tab_fork);
-	data->t_fork[philo->right_f] = 0;
-	pthread_mutex_unlock(&data->tab_fork);
-	pthread_mutex_unlock(&data->m_fork[philo->right_f]);
+	ft_unlock_fork_after_eat(data, philo);
 }
 
 void	sleeping(t_philo *philo, t_data *data)
@@ -91,7 +85,8 @@ void	sleeping(t_philo *philo, t_data *data)
 		return ;
 	echoing(philo, data, SLEEP);
 	my_usleep(data->time_to_sleep, data);
-	if (philo->last_eat >= 0 && get_time() - philo->last_eat > data->time_to_die)
+	if (philo->last_eat >= 0 && get_time() - philo->last_eat \
+	> data->time_to_die)
 		return (died(philo, data));
 	echoing(philo, data, THINK);
 }

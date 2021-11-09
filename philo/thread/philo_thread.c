@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/09 13:57:54 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:13:46 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ void	*routine(void *arg)
 		if (data->nbr_of_eat > 0 && philo->meal_nbr == data->nbr_of_eat)
 		{
 			data->end_eat++;
-			return(NULL);
-		}
-		if (ft_check_dead(data))
-		{
-			ft_unlock_fork(data, philo);
 			return (NULL);
 		}
+		if (ft_check_dead(data))
+			return (NULL);
 		sleeping(philo, data);
 	}
 	return (NULL);
@@ -55,7 +52,7 @@ void	*routine(void *arg)
 int	philo_thread(t_data *data)
 {
 	int			i;
-	
+
 	i = 0;
 	pthread_mutex_init(&data->m_monitor, NULL);
 	if (pthread_create(&data->monitoring, NULL, &monitoring, (void *)data))
@@ -63,7 +60,8 @@ int	philo_thread(t_data *data)
 	data->start = get_time();
 	while (i < data->nbr_human)
 	{
-		if (pthread_create(&data->philo[i].th, NULL, &routine, (void *)&data->philo[i]))
+		if (pthread_create(&data->philo[i].th, NULL, &routine, \
+		(void *)&data->philo[i]))
 			return (ft_phtread_create_error(data));
 		i++;
 	}

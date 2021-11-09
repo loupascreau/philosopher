@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:50:54 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/08 15:01:22 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:09:37 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@
 /*								print actions								  */
 /******************************************************************************/
 
-# define	FORK	"has taken a fork"
-# define	EAT		"is eating"
-# define	SLEEP	"is sleeping"
-# define	THINK	"is thinking"
-# define	DIED	"died"
+# define FORK	"has taken a fork"
+# define EAT		"is eating"
+# define SLEEP	"is sleeping"
+# define THINK	"is thinking"
+# define DIED	"died"
 
 /******************************************************************************/
 /*									signaux									  */
 /******************************************************************************/
 
-# define	INIT	0
-# define	DEAD	1
-# define	STOP	2
+# define INIT	0
+# define DEAD	1
+# define STOP	2
 
 /******************************************************************************/
 /*							structure generale								  */
@@ -108,6 +108,7 @@ void	ft_unlock_fork(t_data *data, t_philo *philo);
 void	echoing(t_philo *philo, t_data *data, char *action);
 void	take_a_fork(t_philo *philo, t_data *data, int fork);
 void	eat(t_philo *philo, t_data *data);
+void	ft_unlock_fork_after_eat(t_data *data, t_philo *philo);
 void	sleeping(t_philo *philo, t_data *data);
 void	died(t_philo *philo, t_data *data);
 
