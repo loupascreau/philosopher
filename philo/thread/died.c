@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 14:15:42 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 10:01:56 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:36:13 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ft_unlock_fork(t_data *data, t_philo *philo)
 	if (data->time_to_die < data->time_to_eat)
 		return ;
 	pthread_mutex_lock(&data->tab_fork);
-	if (data->t_fork[philo->left_f] == philo->human && philo->left_f == philo->human)
+	if (data->t_fork[philo->left_f] == philo->human && \
+	philo->left_f == philo->human)
 	{
 		data->t_fork[philo->left_f] = -1;
 		pthread_mutex_unlock(&data->m_fork[philo->left_f]);
@@ -66,4 +67,25 @@ void	ft_unlock_fork_after_eat(t_data *data, t_philo *philo)
 	data->t_fork[philo->right_f] = -1;
 	pthread_mutex_unlock(&data->tab_fork);
 	pthread_mutex_unlock(&data->m_fork[philo->right_f]);
+}
+
+void	ft_check_unlock_before_exit(t_data *data, t_philo *philo)
+{
+	pthread_mutex_lock(&data->tab_fork);
+	if (philo->left_f == philo->human && data->t_fork[philo->left_f] \
+	== philo->human && data->t_fork[philo->right_f] == philo->human && \
+	data->nbr_human > 1)
+	{
+		data->t_fork[philo->left_f] = -1;
+		pthread_mutex_unlock(&data->m_fork[philo->left_f]);
+		data->t_fork[philo->right_f] = -1;
+		pthread_mutex_unlock(&data->m_fork[philo->right_f]);
+	}
+	if (philo->left_f == philo->human && data->t_fork[philo->left_f] \
+	== philo->left_f && data->t_fork[philo->right_f] == -1)
+	{
+		data->t_fork[philo->left_f] = -1;
+		pthread_mutex_unlock(&data->m_fork[philo->left_f]);
+	}
+	pthread_mutex_unlock(&data->tab_fork);
 }

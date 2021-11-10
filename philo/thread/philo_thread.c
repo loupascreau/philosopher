@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 10:37:09 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:36:40 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,7 @@ void	*routine(void *arg)
 		}
 		if (ft_check_dead(data))
 		{
-//			printf("h = %d, t_l = %d, t_r = %d\n", philo->human, data->t_fork[philo->left_f], data->t_fork[philo->right_f]);
-			pthread_mutex_lock(&data->tab_fork);
-			if (philo->left_f == philo->human && data->t_fork[philo->left_f] \
-			== philo->human && data->t_fork[philo->right_f] == philo->human)
-			{
-				data->t_fork[philo->left_f] = -1;
-				pthread_mutex_unlock(&data->m_fork[philo->left_f]);
-				data->t_fork[philo->right_f] = -1;
-				pthread_mutex_unlock(&data->m_fork[philo->right_f]);
-			}
-			pthread_mutex_unlock(&data->tab_fork);	
+			ft_check_unlock_before_exit(data, philo);
 			return (NULL);
 		}
 		sleeping(philo, data);

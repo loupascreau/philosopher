@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:50:54 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/09 16:09:37 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:34:59 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		philo_thread(t_data *data);
 void	ft_only_one_philo(t_philo *philo, t_data *data);
 int		ft_check_dead(t_data *data);
 void	ft_unlock_fork(t_data *data, t_philo *philo);
+void	ft_check_unlock_before_exit(t_data *data, t_philo *philo);
 
 /******************************************************************************/
 /*									actions									  */

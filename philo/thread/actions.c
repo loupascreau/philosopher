@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 15:03:12 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 10:37:48 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:07:07 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ void	take_a_fork(t_philo *philo, t_data *data, int fork)
 	if (ft_check_dead(data))
 		return ;
 	pthread_mutex_lock(&data->tab_fork);
-	printf("h = %d, t_f = %d\n", philo->human, data->t_fork[fork]);
 	if (data->t_fork[fork] != -1)
 	{
-		while (data->time_to_die < data->time_to_eat)
+		while (data->time_to_die <= data->time_to_eat)
 		{
 			if (get_time() - data->start >= data->time_to_die)
 			{

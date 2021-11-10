@@ -6,7 +6,7 @@
 #    By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 14:52:42 by lpascrea          #+#    #+#              #
-#    Updated: 2021/11/10 10:17:02 by lpascrea         ###   ########.fr        #
+#    Updated: 2021/11/10 14:33:48 by lpascrea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS		=	${SRCS:.c=.o}
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror -g -O1 -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror
 
 RM			=	rm -f
 
