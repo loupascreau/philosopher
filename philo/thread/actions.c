@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 15:03:12 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/09 16:24:14 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 08:58:51 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	echoing(t_philo *philo, t_data *data, char *action)
 	pthread_mutex_lock(&data->m_write);
 	if (ft_check_dead(data))
 	{
-		printf("human_b = %d\n", philo->human);
 		pthread_mutex_unlock(&data->m_write);
 		ft_unlock_fork(data, philo);
 		return ;
@@ -49,9 +48,8 @@ void	take_a_fork(t_philo *philo, t_data *data, int fork)
 	}
 	pthread_mutex_unlock(&data->tab_fork);
 	pthread_mutex_lock(&data->m_fork[fork]);
-	printf("human = %d\n", philo->human);
 	pthread_mutex_lock(&data->tab_fork);
-	data->t_fork[fork] = 1;
+	data->t_fork[fork] = philo->human;
 	pthread_mutex_unlock(&data->tab_fork);
 	echoing(philo, data, FORK);
 }

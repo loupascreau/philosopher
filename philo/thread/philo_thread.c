@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:47:10 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/09 16:13:46 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 09:48:13 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,28 @@ void	*routine(void *arg)
 			return (NULL);
 		}
 		if (ft_check_dead(data))
+		{
+			pthread_mutex_lock(&data->tab_fork);
+			if (philo->left_f == philo->human && data->t_fork[philo->left_f] \
+			== philo->human && data->t_fork[philo->right_f] == philo->human)
+			{
+				data->t_fork[philo->left_f] = -1;
+				pthread_mutex_unlock(&data->m_fork[philo->left_f]);
+			}
+		/*	if (philo->human == philo->left_f && data->t_fork[philo->right_f] == 0 && \
+			philo->human == data->nbr_human - 1)
+			{
+				if (data->t_fork[philo->left_f - 1] && data->t_fork[philo->left_f - 1] == -1)
+				{
+					printf("human = %d, left = %d, t_l = %d, t_r = %d\n", philo->human, \
+					philo->left_f, data->t_fork[philo->left_f], data->t_fork[philo->right_f]);
+					data->t_fork[philo->left_f] = -1;
+					pthread_mutex_unlock(&data->m_fork[philo->left_f]);
+				}
+			}*/
+			pthread_mutex_unlock(&data->tab_fork);	
 			return (NULL);
+		}
 		sleeping(philo, data);
 	}
 	return (NULL);

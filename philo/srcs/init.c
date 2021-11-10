@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:16:40 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/09 16:05:17 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 09:50:32 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_philo(t_data *data)
 	i = 0;
 	while (i < data->nbr_human)
 	{
-		data->t_fork[i] = 0;
+		data->t_fork[i] = -1;
 		data->philo[i].data = data;
 		data->philo[i].human = i;
 		data->philo[i].last_eat = -1;
