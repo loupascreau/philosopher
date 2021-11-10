@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 14:15:42 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 09:06:33 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/10 10:01:56 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	ft_unlock_fork(t_data *data, t_philo *philo)
 void	ft_unlock_fork_after_eat(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&data->tab_fork);
-	data->t_fork[philo->left_f] = 0;
+	data->t_fork[philo->left_f] = -1;
 	pthread_mutex_unlock(&data->tab_fork);
 	pthread_mutex_unlock(&data->m_fork[philo->left_f]);
 	pthread_mutex_lock(&data->tab_fork);
-	data->t_fork[philo->right_f] = 0;
+	data->t_fork[philo->right_f] = -1;
 	pthread_mutex_unlock(&data->tab_fork);
 	pthread_mutex_unlock(&data->m_fork[philo->right_f]);
 }
