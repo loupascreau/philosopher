@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 15:03:12 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 14:07:07 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/12 08:38:57 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	take_a_fork(t_philo *philo, t_data *data, int fork)
 				return (died(philo, data));
 			}
 		}
+		if (ft_no_time_enough(data, philo))
+			return ;
 	}
 	pthread_mutex_unlock(&data->tab_fork);
 	pthread_mutex_lock(&data->m_fork[fork]);
@@ -73,6 +75,7 @@ void	eat(t_philo *philo, t_data *data)
 	echoing(philo, data, EAT);
 	philo->meal_nbr++;
 	philo->last_eat = get_time();
+	data->start_eat = philo->last_eat;
 	my_usleep(data->time_to_eat, data);
 	ft_unlock_fork_after_eat(data, philo);
 }

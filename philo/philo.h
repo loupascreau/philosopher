@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:50:54 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 14:34:59 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/12 08:24:57 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_data
 	pthread_mutex_t		*m_fork;
 	pthread_mutex_t		tab_fork;
 	int					*t_fork;
+	long				start_eat;
 }				t_data;
 
 /******************************************************************************/
@@ -101,6 +102,7 @@ void	ft_only_one_philo(t_philo *philo, t_data *data);
 int		ft_check_dead(t_data *data);
 void	ft_unlock_fork(t_data *data, t_philo *philo);
 void	ft_check_unlock_before_exit(t_data *data, t_philo *philo);
+int		ft_no_time_enough(t_data *data, t_philo *philo);
 
 /******************************************************************************/
 /*									actions									  */

@@ -6,7 +6,7 @@
 /*   By: lpascrea <lpascrea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:16:40 by lpascrea          #+#    #+#             */
-/*   Updated: 2021/11/10 09:50:32 by lpascrea         ###   ########.fr       */
+/*   Updated: 2021/11/12 08:11:14 by lpascrea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_init(t_data *data, char **argv, int argc)
 {
 	data->sig = INIT;
 	data->end_eat = 0;
+	data->start_eat = 0;
 	data->nbr_human = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
